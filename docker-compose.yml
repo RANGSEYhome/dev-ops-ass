@@ -50,3 +50,8 @@ services:
       - 6379:6379
 volumes:
   postgresdata:
+
+networks:
+  production-networks:
+    name: bind
+    external: true
