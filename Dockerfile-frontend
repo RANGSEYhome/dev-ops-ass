@@ -6,6 +6,6 @@ WORKDIR /frontend
 COPY frontend/package.json frontend/yarn.lock ./
 RUN yarn install
 
-COPY frontend/src ./src
+COPY frontend ./frontend
 
 CMD ["yarn", "start"]
