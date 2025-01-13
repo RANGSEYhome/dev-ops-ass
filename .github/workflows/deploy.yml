@@ -19,6 +19,6 @@ jobs:
             git pull
             . ~/.nvm/nvm.sh  # Load nvm for the current session
             nvm install 16     # Install Node.js version 16
-            #docker compose down
-            #docker compose build
-            #docker compose up -d
+            docker compose down
+            docker compose build
+            docker compose up -d
