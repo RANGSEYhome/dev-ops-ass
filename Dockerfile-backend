@@ -4,9 +4,9 @@ FROM --platform=linux/amd64 node:16.20.2-alpine
 # Set the working directory for your application
 WORKDIR /backend
 
-# Copy only the package.json, yarn.lock, and .env file for installing dependencies
+# Copy only the package.json, yarn.lock, and .env.example file for installing dependencies
 COPY backend/package.json backend/yarn.lock ./
-COPY backend/.env ./
+COPY backend/.env.example ./backend/.env
 
 # Install dependencies
 RUN yarn install --frozen-lockfile
