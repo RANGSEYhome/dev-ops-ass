@@ -15,7 +15,7 @@ jobs:
           key: ${{ secrets.CONTABO_KEY }}
           port: 22
           script: |
-            cd full-devops
+            cd dev-ops-ass
             git pull
             . ~/.nvm/nvm.sh
             #docker compose down
