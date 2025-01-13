@@ -1,26 +1,23 @@
-name: Deploy
-
+name: Automate Re-deploy
 on:
   push:
     branches:
-      - master
-
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'  # Specify your Node.js version
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Deploy
-      run: |
-        ssh user@your_server_ip 'cd /path/to/deploy && git pull origin master && npm install && pm2 restart all'
+      - name: SSH remote to Contabo VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: 212.28.178.254
+          username: root
+          key: ${{ secrets.CONTABO_KEY }}
+          port: 22
+          script: |
+            cd full-devops
+            git pull
+            . ~/.nvm/nvm.sh
+            docker compose down
+            docker composer build
+            docker compose up -d
