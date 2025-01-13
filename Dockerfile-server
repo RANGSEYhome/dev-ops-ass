@@ -1,13 +1,24 @@
+# Use the official Node.js image as the base
 FROM --platform=linux/amd64 node:16.20.2-alpine
 
-ARG ENV_FILE
+# Set the working directory for your application
 WORKDIR /backend
-COPY backend/package.json backend/yarn.lock backend/.env ./
-RUN yarn install
 
+# Copy only the package.json, yarn.lock, and .env file for installing dependencies
+COPY backend/package.json backend/yarn.lock ./
+COPY backend/.env ./
+
+# Install dependencies
+RUN yarn install --frozen-lockfile
+
+# Copy the rest of your application code
 COPY backend .
+
+# Build the application
 RUN yarn build
 
+# Expose the port that the app runs on
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+# Start the application
+CMD ["yarn", "start"]
