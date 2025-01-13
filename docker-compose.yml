@@ -2,7 +2,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-backend
       args:
         ENV_FILE: "./backend/.env.example"
     container_name: backend
@@ -17,7 +17,7 @@ services:
     container_name: vue-frontend-tfd
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-frontend
   nginx-load-balancer:
     build:
       context: .
