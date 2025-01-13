@@ -1,24 +1,24 @@
 version: '3.8'
 
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: frontend/Dockerfile
-    ports:
-      - "3001:3000"  # Change the host port as needed
-    networks:
-      - app-network
-
   server:
     build:
       context: .
-      dockerfile: backend/Dockerfile
+      dockerfile: Dockerfile-backend
+    volumes:
+      - ./backend:/backend
     ports:
-      - "3000:3000"  # Change the host port as needed
-    networks:
-      - app-network
+      - "5000:5000"
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - "3000:3000"
 
 networks:
-  app-network:
-    driver: bridge
+  default:
+    name: bind
