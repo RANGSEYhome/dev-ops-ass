@@ -17,7 +17,8 @@ jobs:
           script: |
             cd dev-ops-ass
             git pull
-            nvm install 16
+            . ~/.nvm/nvm.sh  # Load nvm for the current session
+            nvm install 16     # Install Node.js version 16
             #docker compose down
-            #docker composer build
+            #docker compose build
             #docker compose up -d
