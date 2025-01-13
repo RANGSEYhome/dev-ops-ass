@@ -20,5 +20,5 @@ services:
       - "3000:3000"
 
 networks:
-  bind:
-    external: true
+  default:
+    name: production-networks
