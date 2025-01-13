@@ -17,7 +17,7 @@ jobs:
           script: |
             cd dev-ops-ass
             git pull
-            . ~/.nvm/nvm.sh
+            
             #docker compose down
             #docker composer build
             #docker compose up -d
