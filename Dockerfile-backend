@@ -1,13 +1,25 @@
-FROM --platform=linux/amd64 node:16.20.2-alpine
+# Use a Node.js base image
+FROM node:16.20.2-alpine
 
-ARG ENV_FILE
+# Set the working directory
 WORKDIR /backend
-COPY backend/package.json backend/yarn.lock backend/.env ./
+
+# Pass the environment file via build argument
+ARG ENV_FILE=./backend/.env.example
+
+# Copy necessary files
+COPY backend/package.json backend/yarn.lock ./
+COPY ${ENV_FILE} /backend/.env
+
+# Install dependencies
 RUN yarn install
 
-COPY backend .
-RUN yarn build
+# Copy the rest of the application files
+COPY backend/src ./src
+COPY backend/upload ./upload
 
+# Expose the application's port
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+# Start the application
+CMD ["yarn", "start"]
