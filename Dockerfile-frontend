@@ -1,24 +1,23 @@
+# Use the official Node.js image as the base image
 FROM node:16.20.2-alpine
 
-WORKDIR /backend
+# Set the working directory
+WORKDIR /frontend
 
-# Copy environment file
-COPY ./backend/.env.example /backend/.env
+# Copy the frontend files
+COPY frontend/package.json frontend/yarn.lock ./
 
-# Copy package files
-COPY backend/package.json backend/yarn.lock ./
-
+# Install dependencies
 RUN yarn install
 
-# Copy application files
-COPY backend/src ./src
+# Copy the rest of the frontend files
+COPY frontend/src ./src
 
-# Ensure upload directory exists
-RUN mkdir -p ./upload
+# Build the frontend application
+RUN yarn build
 
-# Optional: If upload directory exists locally, copy it
-COPY backend/upload ./upload
-
+# Expose the port the app runs on
 EXPOSE 3000
 
+# Start the application
 CMD ["yarn", "start"]
