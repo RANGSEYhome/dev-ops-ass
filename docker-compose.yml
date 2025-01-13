@@ -3,22 +3,18 @@ version: '3.8'
 services:
   server:
     build:
-      context: .
-      dockerfile: Dockerfile-backend
-    volumes:
-      - ./backend:/backend
-    ports:
-      - "5000:5000"
-  
+      context: ./backend
+      dockerfile: Dockerfile
+    networks:
+      - default
+
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile-frontend
-    volumes:
-      - ./frontend:/frontend
-    ports:
-      - "3000:3000"
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - default
 
 networks:
   default:
-    name: bind
+    driver: bridge
