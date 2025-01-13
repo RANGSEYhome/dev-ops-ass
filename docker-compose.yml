@@ -17,7 +17,7 @@ services:
     container_name: vue-frontend-tfd
     build: 
       context: .
-      dockerfile: Dockerfile-frontend
+      dockerfile: Dockerfile
   nginx-load-balancer:
     build:
       context: .
