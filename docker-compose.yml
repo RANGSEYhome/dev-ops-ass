@@ -18,8 +18,3 @@ services:
       - "5000:5000"
     volumes:
       - ./backend:/backend
-
-  networks:
-    production-networks:
-      name: bind
-      external: true
