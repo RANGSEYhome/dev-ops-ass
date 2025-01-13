@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Specify your Node.js version
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy
+      run: |
+        ssh user@your_server_ip 'cd /path/to/deploy && git pull origin master && npm install && pm2 restart all'
