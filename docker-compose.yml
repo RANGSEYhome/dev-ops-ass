@@ -2,7 +2,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: Dockerfile-backend
+      dockerfile: Dockerfile
       args:
         ENV_FILE: "./backend/.env.example"
     container_name: backend
