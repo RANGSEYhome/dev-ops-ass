@@ -31,7 +31,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-frontend
-    command: /bin/sh -c "cp .env.example .env"
     ports:
       - 3000:3000
   db:

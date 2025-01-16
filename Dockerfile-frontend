@@ -8,7 +8,9 @@ RUN yarn install
 
 # Copy the application files excluding unnecessary items (.dockerignore handles this)
 COPY frontend/ ./
-
+# rph start
+COPY .env.example .env
+# rph end
 RUN yarn build
 
 EXPOSE 3000
