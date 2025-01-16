@@ -31,10 +31,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-frontend
-    # rph start
-    volumes:
-      - ./frontend/.env.example:.env
-    # rph end
+    command: /bin/sh -c "cp .env.example .env"
     ports:
       - 3000:3000
   db:
