@@ -3,7 +3,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-backend
-    container_name: tfd-nest
+    container_name: tfd-nest-backend
     depends_on:
       - db
       - redis
@@ -25,9 +25,9 @@ services:
       - NEST_PORT=3000
       - NGINX_MAX_BODY=100M
     ports:
-      - 8080:80
+      - 8080:8080
   frontend:
-    container_name: vue-frontend-dev
+    container_name: tfd-vue-frontend-dev
     build: 
       context: .
       dockerfile: Dockerfile-frontend
