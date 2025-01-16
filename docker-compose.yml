@@ -40,6 +40,7 @@ services:
       POSTGRES_DB: nest
       POSTGRES_USER: nest
       POSTGRES_PASSWORD: nest
+      PGDATA: /var/lib/postgresql/data
     ports:
       - 5432:5432
     volumes:
@@ -50,4 +51,5 @@ services:
     ports:
       - 6379:6379
 volumes:
-  postgresdata:
+  - postgresdata:/var/lib/postgresql
+  - ./postgres-init:/docker-entrypoint-initdb.d
