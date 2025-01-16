@@ -31,6 +31,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile-frontend
+    volumes:
+      - ./frontend/.nuxt:/app/.nuxt
     ports:
       - 3000:3000
   db:
@@ -40,7 +42,6 @@ services:
       POSTGRES_DB: nest
       POSTGRES_USER: nest
       POSTGRES_PASSWORD: nest
-      PGDATA: /var/lib/postgresql/data
     ports:
       - 5432:5432
     volumes:
