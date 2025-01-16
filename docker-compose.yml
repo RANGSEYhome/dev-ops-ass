@@ -1,103 +1,55 @@
+version: '3.8'
+
 services:
-  server:
+  backend:
     build:
       context: .
       dockerfile: Dockerfile-backend
-      args:
-        ENV_FILE: "./backend/.env"
-    container_name: server
+    container_name: backend-service
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=database-service
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=mydatabase
     depends_on:
-      - postgres-db
-      - cache-server-redis
-    volumes:
-      - ./backend/upload:/backend/upload
-      - ./backend/src:/backend/src
-      - ./backend/.env:/backend/.env
+      - database
+
   frontend:
-    container_name: vue-frontend-tfd
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile-frontend
-  nginx-load-balancer:
+    container_name: frontend-service
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  nginx:
     build:
       context: .
       dockerfile: Dockerfile-nginx
-    container_name: nginx-load-balancer
+    container_name: nginx-service
+    ports:
+      - "80:80"
     depends_on:
-      - server
-    environment:
-      - NGINX_SERVER_NAME=localhost
-      - HOST_1=server
-      # - HOST_2=tfd-elearning-platform-server-2
-      # - HOST_3=tfd-elearning-platform-server-3
-      - PORT=3000
-      - NGINX_MAX_BODY=100M
-  postgres-db:
-    image: postgres:12
-    container_name: postgres-db
-    environment:
-      POSTGRES_DB: nest
-      POSTGRES_USER: nest
-      POSTGRES_PASSWORD: nest
+      - frontend
+      - backend
+
+  database:
+    image: postgres:latest
+    container_name: database-service
     ports:
-      - 5432:5432
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydatabase
     volumes:
-      - postgresdata:/var/lib/postgresql
-  cache-server-redis:
-    image: redis:5
-    container_name: cache-server-redis
-    ports:
-      - 6379:6379
+      - pgdata:/var/lib/postgresql/data
+
 volumes:
-  postgresdata:
-
-networks:
-  production-networks:
-    name: bind
-    external: true
-
-
-# services:
-#   nest:
-#     build: .
-#     container_name: tfd-nest
-#     depends_on:
-#       - db
-#       - redis
-#     volumes:
-#       - ./src:/app/src
-#       - ./test:/app/test
-#       - .env.example:/app/.env
-#       - ./upload:/app/upload
-#   nginx:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile-nginx
-#     container_name: tfd-nest-nginx
-#     depends_on:
-#       - nest
-#     environment:
-#       - NGINX_SERVER_NAME=localhost
-#       - NEST_HOST=nest
-#       - NEST_PORT=3000
-#       - NGINX_MAX_BODY=100M
-#     ports:
-#       - 8080:8080
-#   db:
-#     image: postgres:12
-#     container_name: tfd-nest-db
-#     environment:
-#       POSTGRES_DB: nest
-#       POSTGRES_USER: nest
-#       POSTGRES_PASSWORD: nest
-#     ports:
-#       - 5432:5432
-#     volumes:
-#       - postgresdata:/var/lib/postgresql
-#   redis:
-#     image: redis:5
-#     container_name: tfd-redis
-#     ports:
-#       - 6379:6379
-# volumes:
-#   postgresdata:
+  pgdata:
