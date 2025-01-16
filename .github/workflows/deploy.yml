@@ -17,9 +17,11 @@ jobs:
           script: |
             cd dev-ops-ass
             git pull
+            git submodule init
+            git submodule update
             . ~/.nvm/nvm.sh  # Load nvm for the current session
-            nvm install 15.14.0     # Install Node.js version 16
-            nvm use 15.14.0
+            nvm install 16     # Install Node.js version 16
+            nvm use 16
             docker compose down
             docker compose build
             docker compose up -d
