@@ -1,91 +1,40 @@
-services:
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile-backend
-      args:
-        ENV_FILE: "./backend/.env"
-    container_name: server
-    depends_on:
-      - postgres-db
-      - cache-server-redis
-    volumes:
-      - ./backend/upload:/backend/upload
-      - ./backend/src:/backend/src
-      - ./backend/.env:/backend/.env
-  frontend:
-    container_name: vue-frontend-tfd
-    build: 
-      context: .
-      dockerfile: Dockerfile-frontend
-  nginx-load-balancer:
-    build:
-      context: .
-      dockerfile: Dockerfile-nginx
-    container_name: nginx-load-balancer
-    depends_on:
-      - server
-    environment:
-      - NGINX_SERVER_NAME=localhost
-      - HOST_1=server
-      # - HOST_2=tfd-elearning-platform-server-2
-      # - HOST_3=tfd-elearning-platform-server-3
-      - PORT=3000
-      - NGINX_MAX_BODY=100M
-  postgres-db:
-    image: postgres:12
-    container_name: postgres-db
-    environment:
-      POSTGRES_DB: nest
-      POSTGRES_USER: nest
-      POSTGRES_PASSWORD: nest
-    ports:
-      - 5432:5432
-    volumes:
-      - postgresdata:/var/lib/postgresql
-  cache-server-redis:
-    image: redis:5
-    container_name: cache-server-redis
-    ports:
-      - 6379:6379
-volumes:
-  postgresdata:
-
-networks:
-  production-networks:
-    name: bind
-    external: true
-
-
 # services:
-#   nest:
-#     build: .
-#     container_name: tfd-nest
+#   server:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile-backend
+#       args:
+#         ENV_FILE: "./backend/.env"
+#     container_name: server
 #     depends_on:
-#       - db
-#       - redis
+#       - postgres-db
+#       - cache-server-redis
 #     volumes:
-#       - ./src:/app/src
-#       - ./test:/app/test
-#       - .env:/app/.env
-#       - ./upload:/app/upload
-#   nginx:
+#       - ./backend/upload:/backend/upload
+#       - ./backend/src:/backend/src
+#       - ./backend/.env:/backend/.env
+#   frontend:
+#     container_name: vue-frontend-tfd
+#     build: 
+#       context: .
+#       dockerfile: Dockerfile-frontend
+#   nginx-load-balancer:
 #     build:
 #       context: .
 #       dockerfile: Dockerfile-nginx
-#     container_name: tfd-nest-nginx
+#     container_name: nginx-load-balancer
 #     depends_on:
-#       - nest
+#       - server
 #     environment:
 #       - NGINX_SERVER_NAME=localhost
-#       - NEST_HOST=nest
-#       - NEST_PORT=3000
+#       - HOST_1=server
+#       # - HOST_2=tfd-elearning-platform-server-2
+#       # - HOST_3=tfd-elearning-platform-server-3
+#       - PORT=3000
 #       - NGINX_MAX_BODY=100M
-#     ports:
-#       - 8080:8080
-#   db:
+#   postgres-db:
 #     image: postgres:12
-#     container_name: tfd-nest-db
+#     container_name: postgres-db
 #     environment:
 #       POSTGRES_DB: nest
 #       POSTGRES_USER: nest
@@ -94,10 +43,61 @@ networks:
 #       - 5432:5432
 #     volumes:
 #       - postgresdata:/var/lib/postgresql
-#   redis:
+#   cache-server-redis:
 #     image: redis:5
-#     container_name: tfd-redis
+#     container_name: cache-server-redis
 #     ports:
 #       - 6379:6379
 # volumes:
 #   postgresdata:
+
+# networks:
+#   production-networks:
+#     name: bind
+#     external: true
+
+
+services:
+  nest:
+    build: .
+    container_name: tfd-nest
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./src:/app/src
+      - ./test:/app/test
+      - .env.example:/app/.env
+      - ./upload:/app/upload
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    container_name: tfd-nest-nginx
+    depends_on:
+      - nest
+    environment:
+      - NGINX_SERVER_NAME=localhost
+      - NEST_HOST=nest
+      - NEST_PORT=3000
+      - NGINX_MAX_BODY=100M
+    ports:
+      - 8080:8080
+  db:
+    image: postgres:12
+    container_name: tfd-nest-db
+    environment:
+      POSTGRES_DB: nest
+      POSTGRES_USER: nest
+      POSTGRES_PASSWORD: nest
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresdata:/var/lib/postgresql
+  redis:
+    image: redis:5
+    container_name: tfd-redis
+    ports:
+      - 6379:6379
+volumes:
+  postgresdata:
