@@ -4,9 +4,12 @@ WORKDIR /app
 
 # Copy only the dependency files first
 COPY frontend/package.json frontend/yarn.lock ./
+
 # rph start
-#COPY frontend/.env.example .env
+# copy .env.example file to .env
+COPY frontend/.env.example .env
 # rph end
+
 RUN yarn install
 
 # Copy the application files excluding unnecessary items (.dockerignore handles this)
