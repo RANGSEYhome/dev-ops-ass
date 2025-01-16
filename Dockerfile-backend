@@ -5,7 +5,7 @@ ENV NODE_ENV development
 COPY backend/package.json backend/yarn.lock ./
 RUN yarn install
 
-COPY backend/ ./
+COPY backend ./
 
 EXPOSE 4000
 
