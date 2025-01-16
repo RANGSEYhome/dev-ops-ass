@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy only the dependency files first
 COPY frontend/package.json frontend/yarn.lock ./
 # copy .env.example file to .env
-COPY frontend/.env.example .env
+COPY .env.frontend.example .env
 
 RUN yarn install
 
