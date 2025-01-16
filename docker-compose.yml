@@ -4,52 +4,43 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: ../Dockerfile-backend
-    container_name: backend-service
+      dockerfile: Dockerfile-backend
+    env_file: .env
+    volumes:
+      - ./backend:/app
     ports:
-      - "5000:5000"
-    environment:
-      - NODE_ENV=production
-      - DB_HOST=database-service
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=mydatabase
+      - "5000:5000"  # Adjust based on your backend configuration
     depends_on:
-      - database
+      - postgres
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: ../Dockerfile-frontend
-    container_name: frontend-service
+      dockerfile: Dockerfile-frontend
+    env_file: .env
+    volumes:
+      - ./frontend:/app
     ports:
-      - "3000:80"
-    depends_on:
-      - backend
+      - "3000:3000"  # Expose port 3000 for the frontend
 
   nginx:
     build:
       context: ./nginx
-      dockerfile: ../Dockerfile-nginx
-    container_name: nginx-service
+      dockerfile: Dockerfile-nginx
     ports:
-      - "8080:80" # Changed host port to 8080 to avoid conflicts
+      - "80:80"  # Expose port 80 for web traffic
     depends_on:
-      - frontend
       - backend
+      - frontend
 
-  database:
+  postgres:
     image: postgres:latest
-    container_name: database-service
-    ports:
-      - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: your_username  # Change this to your desired username
+      POSTGRES_PASSWORD: your_password  # Change this to your desired password
+      POSTGRES_DB: your_database  # Change this to your desired database name
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  postgres_data:

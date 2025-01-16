@@ -1,29 +1,35 @@
-# Use Node.js base image for build
-FROM node:18-alpine as build
+# Use an appropriate base image
+FROM node:14 AS build
 
 # Set the working directory
 WORKDIR /app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package*.json yarn.lock ./
 
 # Install dependencies using Yarn
 RUN yarn install
 
-# Copy the frontend project
+# Copy the rest of your application
 COPY . .
 
-# Build the frontend
+# Build the frontend application
 RUN yarn build
 
-# Use Nginx to serve the frontend
-FROM nginx:alpine
+# Use a lighter image to serve the app
+FROM node:14
 
-# Copy build files to Nginx's html directory
-COPY --from=build /app/dist /usr/share/nginx/html
+# Install serve globally
+RUN npm install -g serve
 
-# Expose Nginx default port
+# Set the working directory
+WORKDIR /app
+
+# Copy the build artifacts from the previous stage
+COPY --from=build /app/build ./build
+
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Command to run the application
+CMD ["serve", "-s", "build"]

@@ -1,15 +1,9 @@
-# Use Nginx as the base image
-FROM nginx:alpine
+# Use the official Nginx image
+FROM nginx:latest
 
 # Copy custom Nginx configuration
-COPY vhost.template /etc/nginx/conf.d/default.conf
-COPY entrypoint-nginx.sh /entrypoint.sh
+COPY ./nginx/conf.d /etc/nginx/conf.d
+COPY ./nginx/html /usr/share/nginx/html
 
-# Make the script executable
-RUN chmod +x /entrypoint.sh
-
-# Expose Nginx port
+# Expose port 80
 EXPOSE 80
-
-# Start the custom Nginx entrypoint script
-CMD ["/entrypoint.sh"]
