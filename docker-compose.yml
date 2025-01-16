@@ -10,7 +10,7 @@ services:
     volumes:
      - ./backend/upload:/app/upload
      - ./backend/src:/app/src
-     - ./backend/.env:/app/.env
+     - ./backend/.env.example:/app/.env
      - ./backend/test:/app/test
   nginx:
     build:

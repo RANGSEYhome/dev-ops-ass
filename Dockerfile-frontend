@@ -7,7 +7,7 @@ COPY frontend/package.json frontend/yarn.lock ./
 
 # rph start
 # copy .env.example file to .env
-COPY frontend/.env.example .env
+COPY .env.frontend.example .env
 # rph end
 
 RUN yarn install
