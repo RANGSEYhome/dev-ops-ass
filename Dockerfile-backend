@@ -1,20 +1,20 @@
 # Use Node.js base image
 FROM node:18-alpine
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY backend/package*.json ./
+# Copy package.json and yarn.lock
+COPY package.json yarn.lock ./
 
-# Install dependencies
-RUN npm install --production
+# Install dependencies using Yarn
+RUN yarn install --production
 
-# Copy the rest of the application
-COPY backend .
+# Copy the backend project
+COPY . .
 
 # Expose the backend port
 EXPOSE 5000
 
 # Start the backend application
-CMD ["yern", "start"]
+CMD ["yarn", "start"]

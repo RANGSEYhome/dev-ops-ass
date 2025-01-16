@@ -3,8 +3,8 @@ version: '3.8'
 services:
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile-backend
+      context: ./backend
+      dockerfile: ../Dockerfile-backend
     container_name: backend-service
     ports:
       - "5000:5000"
@@ -20,8 +20,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: Dockerfile-frontend
+      context: ./frontend
+      dockerfile: ../Dockerfile-frontend
     container_name: frontend-service
     ports:
       - "3000:80"
@@ -30,8 +30,8 @@ services:
 
   nginx:
     build:
-      context: .
-      dockerfile: Dockerfile-nginx
+      context: ./nginx
+      dockerfile: ../Dockerfile-nginx
     container_name: nginx-service
     ports:
       - "80:80"
