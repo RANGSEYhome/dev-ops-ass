@@ -3,7 +3,7 @@ FROM node:16-alpine
 WORKDIR /app
 ENV NODE_ENV development
 COPY backend/package.json backend/yarn.lock ./
-COPY backend ./
+COPY backend/ ./
 RUN yarn install
 
 EXPOSE 4000
