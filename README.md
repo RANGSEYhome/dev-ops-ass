@@ -5,14 +5,18 @@ This project is a requirement for completion of the DEVOPS class taught by instr
 
 ## Acknowledgement
 I would like to express my sincere gratitude to my instructor, Kheang KimAng, for his invaluable guidance and support throughout this DEVOPS class. His teaching has greatly enhanced my understanding of the subject matter.
+
 I would also like to thank my classmates for their collaboration and assistance in fixing errors. Special thanks to Mr. LONG Ratha for his hard work in resolving most of the errors ([Fix error in the original submodule](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)) and for taking the lead on many aspects of the assignment.
+
 This assignment has taught me a great deal. I have gained knowledge through practice and can see that the concepts I learned are now a little more clear in my mind. Although I did not complete all the assignments, I truly learned from this experience, which served as real practice.
+
 I appreciate the opportunity to grow and learn in this class. The skills I've acquired and the challenges I've faced have not only deepened my understanding of DEVOPS but have also inspired me to embrace future projects.
 
 ## Assignment Instruction and Requirement
 Given fronten and backend repository, fork them
 - Frontend: https://github.com/tfd-ed/tfd-nest-boilerplate
 - Backend: https://github.com/tfd-ed/tfd-nuxt-tailwind-boilerplate
+
 What to do:
 1. Create a new Github repository that submodule forked fronten and backend
 2. Create docker compose that combine fronten and backend (also DB and Nginx and other services)
