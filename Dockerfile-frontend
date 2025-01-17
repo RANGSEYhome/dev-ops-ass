@@ -2,11 +2,10 @@ FROM node:16.20.2-slim
 
 WORKDIR /app
 
-# Copy only the dependency files first
 COPY frontend/package.json frontend/yarn.lock ./
-# copy .env.example file to .env
-COPY .env.frontend.example /app/backend/.env
 COPY frontend/ ./
+COPY .env.frontend.example frontend/.env
+
 RUN yarn install
 RUN yarn build
 
