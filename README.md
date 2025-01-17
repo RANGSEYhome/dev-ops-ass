@@ -142,7 +142,7 @@ ssh-copy-id username@your-server-ip
     - Go to the repo Settings
     - Click on Secrets and variables > Actions
     - Create a secret with the name CONTABO_KEY and paste your private key:
-    ``sh
+    ```sh
     cat ~/.ssh/id_rsa
     ```
     Copy the output and paste it into the secret field.
