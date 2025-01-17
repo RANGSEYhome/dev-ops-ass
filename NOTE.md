@@ -40,3 +40,4 @@ confirmPassword
 ```sh
 passwordConfirmation
 ```
+Except: $t("confirmPassword")
