@@ -3,7 +3,7 @@
 ## Error
 Some errors in given repository (forked fronten and backend)
 ### Backend
-#### In auth.controller.ts (backend/module/auth/auth.controller.ts)
+#### In auth.controller.ts (backend/src/module/auth/auth.controller.ts)
 Add Public decorator in Register user to allow access to this endpoint without authentication
 ```sh
 @Public()
