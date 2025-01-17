@@ -16,12 +16,21 @@ jobs:
           port: 22
           script: |
             cd dev-ops-ass
-            git pull
-            git submodule init
-            git submodule update
-            . ~/.nvm/nvm.sh  # Load nvm for the current session
-            nvm install 16     # Install Node.js version 16
-            nvm use 16
-            #docker compose down
-            docker compose build
-            docker compose up -d
+            git fetch
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+              echo "Changes detected. Pulling updates..."
+              git pull
+              git submodule update --init --recursive
+
+              . ~/.nvm/nvm.sh
+              nvm install 16
+              nvm use 16
+
+              echo "Building updated containers..."
+              docker compose build --pull
+
+              echo "Applying updates to running containers..."
+              docker compose up -d --no-deps --build
+            else
+              echo "No changes detected. Skipping redeployment."
+            fi
