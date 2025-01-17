@@ -25,16 +25,14 @@ git clone --recurse-submodules https://github.com/RANGSEYhome/dev-ops-ass.git
 ```sh
 cd dev-ops-ass
 ```
-3. Copy .env to fronten and backend submodule
+3. Edit .env files as needed (can also navigate to edit later)
+- .env.backend.example: edit JWT, DATABASE, and REDIS CACHE as needed
+- .env.frontend.example: edit api url
+3. Copy .env files to fronten and backend submodule
 ```sh
-rm -rf backend/.env
 cp .env.backend.example backend/.env
-rm -rf frontend/.env
 cp .env.frontend.example frontend/.env
 ```
-4. Navigate to each submodule to edit .env files as needed
-- .env in backend: edit JWT, DATABASE, and REDIS CACHE as needed
-- .env in frontend: edit api url
 5. Build and run containers in detached mode
 ```sh
 docker compose up --build -d
