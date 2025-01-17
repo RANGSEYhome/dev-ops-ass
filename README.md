@@ -83,9 +83,13 @@ git submodule update --init --recursive
 - Dockerfile-backend
 - Dockerfile-frontend
 - Dockerfile-nginx
+
 **Start Important Fix**
+
 [Fix error in the original submodule](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)
+
 **End Important Fix**
+
 3. Deploy the repository in VPS and map the domain appropriately (last-day.***)
 - Map domain for frontend and api
 - Clone the Repository
