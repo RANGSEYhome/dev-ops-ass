@@ -146,4 +146,8 @@ ssh-copy-id username@your-server-ip
     cat ~/.ssh/id_rsa
     ```
     Copy the output and paste it into the secret field.
+- Change host (in .github/workflows deploy.yml)
+```sh
+host: VPS_IP_ADDRESS
+```
 - Change something in submodule to test Actions Workflow
