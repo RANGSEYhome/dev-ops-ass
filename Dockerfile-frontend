@@ -5,9 +5,6 @@ WORKDIR /app
 COPY frontend/package.json frontend/yarn.lock ./
 COPY frontend/ ./
 
-RUN rm -rf backend/.env
-COPY .env.frontend.example frontend/.env
-
 RUN yarn install
 RUN yarn build
 

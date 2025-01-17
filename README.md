@@ -18,4 +18,24 @@ What to do:
 
 ## Setup Instructions
 1. Clone the Repository
-Open your terminal and run the following command to clone the repository:
+```sh
+git clone --recurse-submodules https://github.com/RANGSEYhome/dev-ops-ass.git
+```
+2. Navigate to the repository folder
+```sh
+cd dev-ops-ass
+```
+3. Copy .env to fronten and backend submodule
+```sh
+rm -rf backend/.env
+cp .env.backend.example backend/.env
+rm -rf frontend/.env
+cp .env.frontend.example frontend/.env
+```
+4. Navigate to each submodule to edit .env files as needed
+- .env in backend: edit JWT, DATABASE, and REDIS CACHE as needed
+- .env in frontend: edit api url
+5. Build and run containers in detached mode
+```sh
+docker compose up --build -d
+```
