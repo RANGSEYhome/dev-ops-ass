@@ -9,34 +9,9 @@ This project is a requirement for completion of the DEVOPS class taught by instr
 Given fronten and backend repository, fork them
 - Frontend: https://github.com/tfd-ed/tfd-nest-boilerplate
 - Backend: https://github.com/tfd-ed/tfd-nuxt-tailwind-boilerplate
-
 What to do:
 1. Create a new Github repository that submodule forked fronten and backend
 2. Create docker compose that combine fronten and backend (also DB and Nginx and other services)
-3. Deploy the repository in VPS and map the domain appropriately (last-day.***)
-4. Build CI/CD pipeline to trigger redeployment upon push to the forked repository on VPS
-
-## Setup Instructions (for starting project from scratch)
-1. Create a new Github repository that submodule forked fronten and backend
-- Create a new Github repository
-- Forked fronten and backend (from link above)
-- Add submodule to repository (navigate to the new Github repository)
-```sh
-git clone --recurse-submodules FORKED_FRONTEND_REPO_RUL frontend
-git clone --recurse-submodules FORKED_BACKEND_REPO_RUL backend
-git submodule update --init --recursive
-```
-2. Create docker compose that combine fronten and backend (also DB and Nginx and other services)
-- nginx
-    - entrypoint-nginx.sh
-    - vhost.template
-- docker-compose.yml
-- Dockerfile-backend
-- Dockerfile-frontend
-- Dockerfile-nginx
-- .gitmodules
-- .env.backend.example
-- .env.frontend.example
 3. Deploy the repository in VPS and map the domain appropriately (last-day.***)
 4. Build CI/CD pipeline to trigger redeployment upon push to the forked repository on VPS
 
@@ -65,3 +40,98 @@ cp .env.frontend.example frontend/.env
 ```sh
 docker compose up --build -d
 ```
+
+## Setup Instructions (for starting project from scratch)
+Project structure:
+- .github/workflows
+- backend
+- frontend
+- nginx
+    - entrypoint-nginx.sh
+    - vhost.template
+- .env.backend.example
+- .env.frontend.example
+- .gitmodules
+- docker-compose.yml
+- Dockerfile-backend
+- Dockerfile-frontend
+- Dockerfile-nginx
+1. Create a new Github repository that submodule forked fronten and backend
+- Create a new Github repository
+- Forked fronten and backend (from link above)
+- Add submodule to repository (navigate to the new Github repository)
+```sh
+git clone --recurse-submodules FORKED_FRONTEND_REPO_RUL frontend
+git clone --recurse-submodules FORKED_BACKEND_REPO_RUL backend
+git submodule update --init --recursive
+```
+2. Create docker compose that combine fronten and backend (also DB and Nginx and other services)
+- nginx
+    - entrypoint-nginx.sh
+    - vhost.template
+- .env.backend.example
+- .env.frontend.example
+- docker-compose.yml
+- Dockerfile-backend
+- Dockerfile-frontend
+- Dockerfile-nginx
+3. Deploy the repository in VPS and map the domain appropriately (last-day.***)
+- Map domain for frontend and api
+- Clone the Repository
+```sh
+git clone --recurse-submodules GITHUB_REPO_URL
+```
+- Navigate to the repository folder
+```sh
+cd GITHUB_REPO_NAME
+```
+- Edit .env files as needed (can also navigate to edit later)
+    - .env.backend.example: edit JWT, DATABASE, and REDIS CACHE as needed
+    - .env.frontend.example: edit api url
+- Copy .env files to fronten and backend submodule
+```sh
+cp .env.backend.example backend/.env
+cp .env.frontend.example frontend/.env
+```
+- Build and run containers in detached mode
+```sh
+docker compose up --build -d
+```
+4. Build CI/CD pipeline to trigger redeployment upon push to the forked repository on VPS
+- Generate SSK key pair
+```sh
+ssh-keygen -t rsa -b 4096 -C
+```
+- Copy the Public Key to VPS
+```sh
+ssh-copy-id username@your-server-ip
+```
+- Manually Add the Public Key (if ssh-copy-id is not available)
+    - Display your public key
+    ```sh
+    cat ~/.ssh/id_rsa.pub
+    ```
+    - Create the .ssh directory (if it doesn't exist):
+    ```sh
+    mkdir -p ~/.ssh
+    ```
+    - Open the authorized_keys
+    ```sh
+    nano ~/.ssh/authorized_keys
+    ```
+    - Paste your public key into the file and save
+    - Set the correct permissions:
+    ```sh
+    chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/authorized_keys
+    ```
+If everything is set up correctly, you should be able to log in without being prompted for a password.
+- Update GitHub Actions Workflow
+    - Go to the repo Settings
+    - Click on Secrets and variables > Actions
+    - Create a secret with the name CONTABO_KEY and paste your private key:
+    ``sh
+    cat ~/.ssh/id_rsa
+    ```
+    Copy the output and paste it into the secret field.
+- Change something in submodule to test Actions Workflow
