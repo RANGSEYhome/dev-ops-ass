@@ -2,6 +2,12 @@
 
 ## Error
 Some errors in given repository (forked fronten and backend)
+- Fixed by Mr. LONG Ratha
+    - In auth.controller.ts (backend/src/module/auth/auth.controller.ts)
+    - In next.confix.js
+    - In registration.vue (frontend/components/forms/registration.vue) > axios api link
+- Fixed by Mr. DAO Vitou
+    - In registration.vue (frontend/components/forms/registration.vue) > passwordConfirmation
 ### Backend
 #### In auth.controller.ts (backend/src/module/auth/auth.controller.ts)
 Add Public decorator in Register user to allow access to this endpoint without authentication

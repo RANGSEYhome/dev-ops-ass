@@ -4,6 +4,10 @@
 This project is a requirement for completion of the DEVOPS class taught by instructor Kheang KimAng.
 
 ## Acknowledgement
+I would like to express my sincere gratitude to my instructor, Kheang KimAng, for his invaluable guidance and support throughout this DEVOPS class. His teaching has greatly enhanced my understanding of the subject matter.
+I would also like to thank my classmates for their collaboration and assistance in fixing errors. Special thanks to Mr. LONG Ratha for his hard work in resolving most of the errors ([Fix error in the original submodule](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)) and for taking the lead on many aspects of the assignment.
+This assignment has taught me a great deal. I have gained knowledge through practice and can see that the concepts I learned are now a little more clear in my mind. Although I did not complete all the assignments, I truly learned from this experience, which served as real practice.
+I appreciate the opportunity to grow and learn in this class. The skills I've acquired and the challenges I've faced have not only deepened my understanding of DEVOPS but have also inspired me to embrace future projects.
 
 ## Assignment Instruction and Requirement
 Given fronten and backend repository, fork them
@@ -75,6 +79,9 @@ git submodule update --init --recursive
 - Dockerfile-backend
 - Dockerfile-frontend
 - Dockerfile-nginx
+**Start Important Fix**
+[Fix error in the original submodule](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)
+**End Important Fix**
 3. Deploy the repository in VPS and map the domain appropriately (last-day.***)
 - Map domain for frontend and api
 - Clone the Repository
@@ -125,7 +132,7 @@ ssh-copy-id username@your-server-ip
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/authorized_keys
     ```
-If everything is set up correctly, you should be able to log in without being prompted for a password.
+    If everything is set up correctly, you should be able to log in without being prompted for a password.
 - Update GitHub Actions Workflow
     - Go to the repo Settings
     - Click on Secrets and variables > Actions
