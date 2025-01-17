@@ -6,7 +6,7 @@ This project is a requirement for completion of the DEVOPS class taught by instr
 ## Acknowledgement
 I would like to express my sincere gratitude to my instructor, Kheang KimAng, for his invaluable guidance and support throughout this DEVOPS class. His teaching has greatly enhanced my understanding of the subject matter.
 
-I would also like to thank my classmates for their collaboration and assistance in fixing errors. Special thanks to Mr. LONG Ratha for his hard work in resolving most of the errors ([Fix error in the original submodule](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)) and for taking the lead on many aspects of the assignment.
+I would also like to thank my classmates for their collaboration and assistance in fixing errors. Special thanks to Mr. LONG Ratha for his hard work in resolving most of the errors ([🚨 Fix error in the original submodule 🚨](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)) and for taking the lead on many aspects of the assignment.
 
 This assignment has taught me a great deal. I have gained knowledge through practice and can see that the concepts I learned are now a little more clear in my mind. Although I did not complete all the assignments, I truly learned from this experience, which served as real practice.
 
@@ -86,7 +86,6 @@ git submodule update --init --recursive
 
 🚨 **Important Fix** 🚨  
 [Fix error in the original submodule](https://github.com/RANGSEYhome/dev-ops-ass/blob/main/NOTE.md#error)  
-🚨 **End Important Fix** 🚨  
 
 3. Deploy the repository in VPS and map the domain appropriately (last-day.***)
 - Map domain for frontend and api
